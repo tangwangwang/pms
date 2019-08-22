@@ -5,14 +5,14 @@
 
 
     <!-- Log4j2 监听器及配置文件地址，要放在 Spring 监听器前面 -->
-    <!--<listener>
+    <listener>
         <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
     </listener>
     <context-param>
         <param-name>log4jConfiguration</param-name>
         <param-value>classpath:config/log4j2-config.xml</param-value>
     </context-param>
-    &lt;!&ndash; Log4j2 过滤器 &ndash;&gt;
+    <!-- Log4j2 过滤器 -->
     <filter>
         <filter-name>log4jServletFilter</filter-name>
         <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
@@ -24,16 +24,16 @@
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
-    </filter-mapping>-->
+    </filter-mapping>
 
     <!-- Logback 监听器及配置文件地址，要放在 Spring 监听器前面 -->
-    <listener>
+    <!--<listener>
         <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
     </listener>
     <context-param>
         <param-name>logbackConfigLocation</param-name>
         <param-value>classpath:config/logback-config.xml</param-value>
-    </context-param>
+    </context-param>-->
 
 
     <!-- 配置 Spring 监听器 -->

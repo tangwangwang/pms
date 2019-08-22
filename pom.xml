@@ -183,7 +183,7 @@
             <version>${slf4j.version}</version>
         </dependency>
         <!-- log4j2 依赖:开始 -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
@@ -204,16 +204,16 @@
             <artifactId>log4j-web</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-        &lt;!&ndash; AsyncLogger 需要 &ndash;&gt;
+        <!-- AsyncLogger 需要 -->
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
             <scope>runtime</scope>
             <version>3.4.2</version>
-        </dependency>-->
+        </dependency>
         <!-- log4j2 依赖:结束 -->
         <!-- logback 依赖:开始 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${slf4j.version}</version>
@@ -238,7 +238,7 @@
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>
             <version>0.1.5</version>
-        </dependency>
+        </dependency>-->
         <!-- logback 依赖:结束 -->
         <!-- log 依赖:结束 -->
 

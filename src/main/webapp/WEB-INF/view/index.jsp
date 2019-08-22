@@ -25,7 +25,8 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
         <!--左侧导航开始-->
-        <nav class="navbar-default navbar-static-side" role="navigation">
+        <jsp:include page="common/sidebar.jsp" flush="true" />
+        <%--<nav class="navbar-default navbar-static-side" role="navigation">
             <div class="nav-close"><i class="fa fa-times-circle"></i>
             </div>
             <div class="sidebar-collapse">
@@ -371,7 +372,7 @@
 
                 </ul>
             </div>
-        </nav>
+        </nav>--%>
         <!--左侧导航结束-->
         <!--右侧部分开始-->
         <div id="page-wrapper" class="gray-bg dashbard-1">
