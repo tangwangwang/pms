@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.fyj.pms.mapper.UserMapper">
+    <!-- 定义缓存 一般是一级缓存，如果用同一个 sqlSession 那么相同查询直接会从缓存中查找 -->
+    <!-- <cache size="1024" flushInterval="60000" eviction="LRU" readOnly="false"></cache> -->
+
+    <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `user`(id, name, birthday) VALUES(default, #{name}, #{birthday})
+    </insert>
+
+    <select id="query" resultType="User" parameterType="Long">
+        SELECT * FROM `user` WHERE id = #{id}
+    </select>
+
+    <update id="modify" parameterType="User">
+        UPDATE `user` SET name = #{name}, birthday = #{birthday} WHERE id = #{id}
+    </update>
+
+    <delete id="clean" parameterType="Long">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Spring 和 MyBatis 完美整合，可以不需要 mybatis 的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- mapper.xml 文件的路径 -->
+        <property name="mapperLocations" value="classpath*:mapper/*.xml"/>
+        <!-- mybatis 配置文件的路径 -->
+        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+        <!-- 指定实体类的包名，指定后不需要 parameterType, returnType 中不需要写包名，多个可以用,;\t\n进行分割 -->
+        <property name="typeAliasesPackage" value="com.fyj.pms.entity"/>
+        <!-- 指定类型处理器的包名，多个可以用,;\t\n进行分割 -->
+        <!--<property name="typeHandlersPackage" value=""/>-->
+        <!-- 配置MyBatis的拦截器，拦截器的配置顺序会影响拦截器的执行顺序配置MyBatis的拦截器 -->
+        <!-- 拦截器的配置顺序会影响拦截器的执行顺序，第一个目标方法前最先执行，目标方法后最后执行，依次类推 -->
+        <!--<property name="plugins">
+            <array>
+                <bean class=""/>
+            </array>
+        </property>-->
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 指定 mapper 的包名，多个可以用,;\t\n进行分割 -->
+        <property name="basePackage" value="com.fyj.pms.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+</beans>

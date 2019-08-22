@@ -60,4 +60,4 @@ transaction-logs
 secrets.yml
 .gradletasknamecache
 .sts4-cache
-src/test
+#src/test

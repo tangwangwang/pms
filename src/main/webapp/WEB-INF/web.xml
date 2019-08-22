@@ -3,6 +3,52 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+
+    <!-- Log4j2 监听器及配置文件地址，要放在 Spring 监听器前面 -->
+    <listener>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>classpath:config/log4j2-config.xml</param-value>
+    </context-param>
+    <!-- Logback 监听器及配置文件地址，要放在 Spring 监听器前面 -->
+    <!--<context-param>
+        <param-name>logbackConfigLocation</param-name>
+        <param-value>classpath:config/logback-config.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+    </listener>-->
+
+
+    <!-- 配置 Spring 监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- Spring 配置文件地址 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:spring/spring.xml,
+            classpath*:spring/spring-*.xml
+        </param-value>
+    </context-param>
+
+    <!-- Log4j2 过滤器 -->
+    <filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
     <!-- 将 post 请求转化为 put/delete 请求 -->
     <filter>
         <filter-name>hiddenHttpMethodFilter</filter-name>
@@ -47,17 +93,39 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- 配置监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <!-- 配置spring容器 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath*:spring/spring.xml,
-            classpath*:spring/spring-*.xml
-        </param-value>
-    </context-param>
+    <!-- 配置 Druid 监控信息显示页面 -->
+    <servlet>
+        <servlet-name>DruidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+        <init-param>
+            <!-- 允许清空统计数据 -->
+            <param-name>resetEnable</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <!-- 用户名 -->
+            <param-name>loginUsername</param-name>
+            <param-value>druid</param-value>
+        </init-param>
+        <init-param>
+            <!-- 密码 -->
+            <param-name>loginPassword</param-name>
+            <param-value>druid</param-value>
+        </init-param>
+        <!-- 允许访问控制页面的IP -->
+        <!--<init-param>
+            <param-name>allow</param-name>
+            <param-value>127.0.0.1</param-value>
+        </init-param>-->
+        <!-- 禁止访问控制页面的IP -->
+        <!--<init-param>
+            <param-name>deny</param-name>
+            <param-value>127.0.0.1</param-value>
+        </init-param>-->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>
