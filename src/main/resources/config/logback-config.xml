@@ -26,13 +26,12 @@
     scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒.当scan为true时，此属性生效。默认的时间间隔为1分钟.
     debug: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
 -->
-<configuration scan="true" scanPeriod="60 seconds" debug="false">
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
 
     <!-- 在Eclipse中运行，请到Eclipse的安装目录中找log文件，Tomcat下，请到Tomcat目录下找 -->
     <property name="LOG_PATH" value="${catalina.base}/logs"/>
     <!-- 项目名称 -->
-    <property name="PROJECT_NAME" value="spring-starter"/>
-
+    <property name="PROJECT_NAME" value="pms"/>
 
     <!-- 控制台打印日志的配置 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -199,11 +198,11 @@
 
 
     <!--
-        出厂默认输出level级别INFO, 排查问题时, 可以通过工具切换为TRACE.
+        出厂默认输出level级别 INFO, 排查问题时, 可以通过工具切换为TRACE.
         自定义模块日志打印 添加在后面.
-        name需要修改为自己项目中的合适的package
+        name 需要修改为自己项目中的合适的 package
      -->
-    <logger name="com.tao" level="INFO" additivity="false">
+    <logger name="com.fyj.pms" level="ALL" additivity="false">
         <appender-ref ref="FILE-ERROR" />
         <appender-ref ref="FILE-WARN" />
         <appender-ref ref="FILE-INFO" />
