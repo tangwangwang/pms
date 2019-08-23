@@ -20,7 +20,7 @@ import java.util.Date;
  * @see describing
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringJUnitConfig(locations = {"classpath:spring/spring-database.xml", "classpath:spring/spring-mybatis.xml"})
+@SpringJUnitConfig(locations = {"classpath:spring/spring.xml", "classpath:spring/spring-*.xml"})
 public class SpringTests {
 
     @Autowired
@@ -36,7 +36,7 @@ public class SpringTests {
 
     @Test
     public void testMybatis(){
-        // User user = new User().setName("张三").setBirthday(new Date());
+        // User user = new User().setUsername("张三").setBirthday(new Date());
         // 测试注解
         // int insert = userMapper.insert(user);
         // System.out.println(user);
