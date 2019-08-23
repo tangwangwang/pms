@@ -242,6 +242,12 @@
         <!-- logback 依赖:结束 -->
         <!-- log 依赖:结束 -->
 
+        <!-- 自定义工具类依赖 -->
+        <dependency>
+            <groupId>com.t2w</groupId>
+            <artifactId>utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
         <!-- Junit 测试依赖 -->
         <dependency>
