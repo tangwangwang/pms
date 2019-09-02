@@ -30,12 +30,12 @@ public class SpringTests {
     private UserMapper userMapper;
 
     @Test
-    public void testConnection(){
+    public void testConnection() {
         System.out.println(dataSource);
     }
 
     @Test
-    public void testMybatis(){
+    public void testMybatis() {
         // User user = new User().setUsername("张三").setBirthday(new Date());
         // 测试注解
         // int insert = userMapper.insert(user);
