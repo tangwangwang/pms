@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
     <meta charset="utf-8">
 </head>
 <body>
@@ -21,16 +20,16 @@
                                 </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                        <li><a class="J_menuItem" href="/user/head">修改头像</a>
                         </li>
-                        <li><a class="J_menuItem" href="profile.html">个人资料</a>
+                        <li><a class="J_menuItem" href="/user/info">个人资料</a>
                         </li>
-                        <li><a class="J_menuItem" href="contacts.html">联系我们</a>
+                        <li><a class="J_menuItem" href="/user/contacts">联系我们</a>
                         </li>
-                        <li><a class="J_menuItem" href="mailbox.html">信箱</a>
+                        <li><a class="J_menuItem" href="/user/mailbox">信箱</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html">安全退出</a>
+                        <li><a href="/user/logout">安全退出</a>
                         </li>
                     </ul>
                 </div>

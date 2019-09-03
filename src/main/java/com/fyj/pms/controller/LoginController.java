@@ -45,14 +45,4 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/index")
-    public String index(HttpServletResponse response){
-        return "index";
-    }
-
-    @GetMapping("/welcome")
-    public String welcome(){
-        return "common/welcome";
-    }
-
 }
