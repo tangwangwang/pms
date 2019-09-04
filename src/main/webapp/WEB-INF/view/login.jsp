@@ -51,6 +51,22 @@
                 <p class="m-t-md">登录到H+后台主题UI框架</p>
                 <input name="username" type="text" class="form-control uname" placeholder="用户名"/>
                 <input name="password" type="password" class="form-control pword m-b" placeholder="密码"/>
+                <!-- 点击式按钮建议高度介于36px与46px  -->
+                <!-- 嵌入式仅需设置宽度，高度根据宽度自适应，最小宽度为200px -->
+                <!-- 自动初始化使用添加属性: data-config='{"vid": "5d6f4df6fc650e9b80225898","type": "click"}' -->
+                <div id="vaptchaContainer" class="vaptcha-container"
+                     style="margin: 15px 0;width: 233px;height: 34px;">
+                    <!--vaptcha-container是用来引入VAPTCHA的容器，下面代码为预加载动画，仅供参考-->
+                    <div class="vaptcha-init-main">
+                        <div class="vaptcha-init-loading">
+                            <a href="https://www.vaptcha.com" target="_blank">
+                                <img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/>
+                            </a>
+                            <span class="vaptcha-text">人机验证启动中...</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="captcha" name="captcha"/>
                 <a href="">忘记密码了？</a>
                 <button type="submit" class="btn btn-success btn-block">登录</button>
             </form>
@@ -72,21 +88,10 @@
 </div>
 
 <script src="/js/jquery.min.js"></script>
-
-<script type="text/javascript">
-    $("#register").click(function () {
-        $("form:first").css("display", "none");
-        $("form:first").next().css("display", "");
-        $(this).parent().parent().find("strong").css("display", "");
-        $(this).parent().css("display", "none");
-    });
-    $("#login").click(function () {
-        $("form:first").css("display", "");
-        $("form:first").next().css("display", "none");
-        $(this).parent().parent().find("strong").css("display", "");
-        $(this).parent().css("display", "none");
-    });
-</script>
+<!-- 点击式验证码JS -->
+<script src="/js/plugins/vaptcha.v2.min.js" charset="UTF-8"></script>
+<!-- 自定义的 JS -->
+<script src="/js/login.js" charset="UTF-8"></script>
 </body>
 
 </html>

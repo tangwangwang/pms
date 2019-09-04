@@ -21,7 +21,7 @@
     </mvc:annotation-driven>
 
     <!-- 定义静态资源路径(可配置多个) -->
-    <mvc:resources mapping="/**" location="/static/"/><!-- cache-period="864000" -->
+    <mvc:resources mapping="/**" location="/static/,/public/"/><!-- cache-period="864000" -->
 
     <!-- 视图解析器 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
