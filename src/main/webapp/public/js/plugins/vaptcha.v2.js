@@ -352,6 +352,8 @@
                 var u = n(t[c]);
                 r(t[c], u)
             }
+            /** 删除"如何验证"的图标 */
+            $(".vp-about").remove();
         }
     }();
     window.onload = j, window.vaptcha = function (e) {

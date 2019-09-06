@@ -12,7 +12,6 @@
     <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/login.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -21,6 +20,42 @@
             window.top.location = window.location;
         }
     </script>
+
+    <style type="text/css">
+        /** 点击式验证码样式: 开始 */
+        .vaptcha-init-main {
+            display: table;
+            width: 100%;
+            height: 100%;
+            background-color: #EEEEEE;
+        }
+
+        .vaptcha-init-loading {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .vaptcha-init-loading > a {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: none;
+        }
+
+        .vaptcha-init-loading > a img {
+            vertical-align: middle
+        }
+
+        .vaptcha-init-loading .vaptcha-text {
+            font-family: sans-serif;
+            font-size: 12px;
+            color: #CCCCCC;
+            vertical-align: middle
+        }
+
+        /** 点击式验证码样式: 结束 */
+    </style>
 
 </head>
 
@@ -59,7 +94,7 @@
                     <!--vaptcha-container是用来引入VAPTCHA的容器，下面代码为预加载动画，仅供参考-->
                     <div class="vaptcha-init-main">
                         <div class="vaptcha-init-loading">
-                            <a href="https://www.vaptcha.com" target="_blank">
+                            <a href="javascript:;" target="_blank">
                                 <img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/>
                             </a>
                             <span class="vaptcha-text">人机验证启动中...</span>
@@ -68,7 +103,7 @@
                 </div>
                 <input type="hidden" id="captcha" name="captcha"/>
                 <a href="">忘记密码了？</a>
-                <button type="submit" class="btn btn-success btn-block">登录</button>
+                <button type="button" id="login_button" class="btn btn-success btn-block">登录</button>
             </form>
             <form method="post" action="/login" style="display: none;">
                 <h4 class="no-margins">注册：</h4>
@@ -89,7 +124,7 @@
 
 <script src="/js/jquery.min.js"></script>
 <!-- 点击式验证码JS -->
-<script src="/js/plugins/vaptcha.v2.min.js" charset="UTF-8"></script>
+<script src="/js/plugins/vaptcha.v2.js" charset="UTF-8"></script>
 <!-- 自定义的 JS -->
 <script src="/js/login.js" charset="UTF-8"></script>
 </body>
