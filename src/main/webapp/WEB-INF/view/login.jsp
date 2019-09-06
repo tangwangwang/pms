@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title>H+ 后台主题UI框架 - 登录</title>
+    <title>登录</title>
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -65,17 +66,17 @@
         <div class="col-sm-7">
             <div class="signin-info">
                 <div class="logopanel m-b">
-                    <h1>[ H+ ]</h1>
+                    <h1>Smile</h1>
                 </div>
                 <div class="m-b"></div>
-                <h4>欢迎使用 <strong>H+ 后台主题UI框架</strong></h4>
-                <ul class="m-b">
+                <h4>欢迎登录 <strong>pms</strong></h4>
+                <%--<ul class="m-b">
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势一</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势二</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势三</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势四</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势五</li>
-                </ul>
+                </ul>--%>
                 <strong>还没有账号？ <a id="register" href="javascript:">立即注册&raquo;</a></strong>
                 <strong style="display: none;">已有账号？ <a id="login" href="javascript:">立即登录&raquo;</a></strong>
             </div>
@@ -83,8 +84,8 @@
         <div class="col-sm-5">
             <form method="post" action="/login">
                 <h4 class="no-margins">登录：</h4>
-                <p class="m-t-md">登录到H+后台主题UI框架</p>
-                <input name="username" type="text" class="form-control uname" placeholder="用户名"/>
+                <%--<p class="m-t-md">登录到H+后台主题UI框架</p>--%>
+                <input name="userName" type="text" class="form-control uname" placeholder="用户名"/>
                 <input name="password" type="password" class="form-control pword m-b" placeholder="密码"/>
                 <!-- 点击式按钮建议高度介于36px与46px  -->
                 <!-- 嵌入式仅需设置宽度，高度根据宽度自适应，最小宽度为200px -->
@@ -123,6 +124,7 @@
 </div>
 
 <script src="/js/jquery.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
 <!-- 点击式验证码JS -->
 <script src="/js/plugins/vaptcha.v2.js" charset="UTF-8"></script>
 <!-- 自定义的 JS -->

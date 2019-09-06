@@ -23,9 +23,17 @@ public class User {
 
     private Long id;
 
-    private String username;
+    private String userName;
 
     private String password;
 
+    private String realName;
+
     private Date birthday;
+
+    private Integer age;
+
+    private Integer phoneNumber;
+
+    private  String headSculptureUrl;
 }

@@ -15,13 +15,13 @@ import org.apache.ibatis.annotations.*;
 public interface UserMapper {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("INSERT INTO `user`(username, birthday) VALUES(#{username}, #{birthday})")
+    @Insert("INSERT INTO `user`(user_name, birthday) VALUES(#{userName}, #{birthday})")
     int insert(User user);
 
     @Select("SELECT * FROM `user` WHERE id = #{id}")
     User select(Long id);
 
-    @Update("UPDATE `user` SET username = #{username}, birthday = #{birthday} WHERE id = #{id}")
+    @Update("UPDATE `user` SET user_name = #{userName}, birthday = #{birthday} WHERE id = #{id}")
     int update(User user);
 
     @Delete("DELETE FROM user WHERE id = #{id}")
@@ -35,6 +35,6 @@ public interface UserMapper {
 
     int clean(Long id);
 
-    @Select("SELECT * FROM `user` WHERE username = #{username} AND password = #{password}")
+    @Select("SELECT * FROM `user` WHERE user_name = #{userName} AND password = #{password}")
     User findByUsernameAndPassword(User user);
 }

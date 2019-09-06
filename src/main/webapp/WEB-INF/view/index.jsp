@@ -31,6 +31,7 @@
                     data-id="index_v1.html" seamless></iframe>
         </div>
         <jsp:include page="common/footer.jsp" flush="true"/>
+        <a href="/welcome">点我</a>
     </div>
     <!--右侧部分结束-->
     <!--右侧边栏开始-->

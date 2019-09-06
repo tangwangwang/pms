@@ -12,7 +12,7 @@ $(function () {
         $(this).parent().parent().find("strong").css("display", "");
         $(this).parent().css("display", "none");
     });
-
+    var captcha;
     // 验证码部分
     vaptcha({
         // 配置参数(必选)
@@ -31,6 +31,7 @@ $(function () {
         scene: ""
     }).then(function (vaptchaObj) {
         // 调用验证实例 vaptchaObj 的 render 方法加载验证按钮
+        captcha = vaptchaObj;
         vaptchaObj.render();
         // obj = vaptchaObj;//将VAPTCHA验证实例保存到局部变量中
         // 验证成功触发, 进行其他操作
@@ -56,10 +57,11 @@ $(function () {
                 token: token
             }
             , success: function (data) {
-                if (data["status"] === "success") {
-                    layer.msg("验证成功");
-                } else {
-                    layer.msg("验证失败");
+                layer.msg(data["msg"]);
+                if (data["status"] != "success") {
+                    captcha.reset();
+                    /** 删除"如何验证"的图标 */
+                    $(".vp-about").remove();
                 }
             }
             , fail: function () {
@@ -68,7 +70,7 @@ $(function () {
             , error: function () {
 
             }
-        })
+        });
     });
 });
 
