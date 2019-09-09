@@ -89,9 +89,4 @@ $(function () {
         }
     });
 
-    // 登录操作
-    // $("#login_button").click(function () {
-    //     var token = $("#captcha").val();
-
-    // });
 });
