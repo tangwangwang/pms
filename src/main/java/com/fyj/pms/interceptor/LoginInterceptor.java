@@ -1,6 +1,7 @@
 package com.fyj.pms.interceptor;
 
 import com.mysql.cj.Session;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,15 +12,16 @@ import javax.servlet.http.HttpSession;
 /**
  * @author FYJ
  * @version V1.0.0
- * @email tang.wangwang@qq.com
+ * @email fu.yujie@qq.com
  * @date 2019-09-03 20:56
  * @name com.fyj.pms.interceptor.LoginInterceptor.java
- * @see 拦截器
+ * @see describing 登录拦截器
  */
+@Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("进入拦截器");
+        log.debug("进入登录拦截器, 拦截路径:{}", request.getServletPath());
         HttpSession session = request.getSession();
         // int count = (int) session.getAttribute("activeUser");
         // if(count>0){

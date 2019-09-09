@@ -23,13 +23,6 @@
     <!-- 定义静态资源路径(可配置多个) -->
     <mvc:resources mapping="/**" location="/static/,/public/"/><!-- cache-period="864000" -->
 
-    <mvc:interceptors>
-    <mvc:interceptor>
-        <mvc:mapping path="/**"/>
-       <!-- <mvc:exclude-mapping path="/user/index"/>-->
-        <bean class="com.fyj.pms.interceptor.LoginInterceptor"/>
-    </mvc:interceptor>
-    </mvc:interceptors>
     <!-- 视图解析器 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"/>

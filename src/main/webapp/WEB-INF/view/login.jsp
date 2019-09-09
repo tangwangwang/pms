@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +12,12 @@
     <title>登录</title>
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/login.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <link href="css/vaptcha.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -21,42 +26,6 @@
             window.top.location = window.location;
         }
     </script>
-
-    <style type="text/css">
-        /** 点击式验证码样式: 开始 */
-        .vaptcha-init-main {
-            display: table;
-            width: 100%;
-            height: 100%;
-            background-color: #EEEEEE;
-        }
-
-        .vaptcha-init-loading {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center
-        }
-
-        .vaptcha-init-loading > a {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: none;
-        }
-
-        .vaptcha-init-loading > a img {
-            vertical-align: middle
-        }
-
-        .vaptcha-init-loading .vaptcha-text {
-            font-family: sans-serif;
-            font-size: 12px;
-            color: #CCCCCC;
-            vertical-align: middle
-        }
-
-        /** 点击式验证码样式: 结束 */
-    </style>
 
 </head>
 
@@ -82,16 +51,19 @@
             </div>
         </div>
         <div class="col-sm-5">
-            <form method="post" action="/login">
+            <form id="login_form" method="post">
                 <h4 class="no-margins">登录：</h4>
                 <%--<p class="m-t-md">登录到H+后台主题UI框架</p>--%>
-                <input name="userName" type="text" class="form-control uname" placeholder="用户名"/>
-                <input name="password" type="password" class="form-control pword m-b" placeholder="密码"/>
+                <input id="login_username" name="username" type="text" class="form-control uname" placeholder="账号/手机号/邮箱"/>
+                <label id="login_username-error" class="error login-error" for="login_username">
+                </label>
+                <input id="login_password" name="password" type="password" class="form-control pword" placeholder="密码" style="margin-top: 20px;"/>
+                <label id="login_password-error" class="error login-error" for="login_password">
+                </label>
                 <!-- 点击式按钮建议高度介于36px与46px  -->
                 <!-- 嵌入式仅需设置宽度，高度根据宽度自适应，最小宽度为200px -->
                 <!-- 自动初始化使用添加属性: data-config='{"vid": "5d6f4df6fc650e9b80225898","type": "click"}' -->
-                <div id="vaptchaContainer" class="vaptcha-container"
-                     style="margin: 15px 0;width: 233px;height: 34px;">
+                <div id="vaptchaContainer" class="vaptcha-container" style="width: 233px; height: 34px; margin-top: 20px;">
                     <!--vaptcha-container是用来引入VAPTCHA的容器，下面代码为预加载动画，仅供参考-->
                     <div class="vaptcha-init-main">
                         <div class="vaptcha-init-loading">
@@ -102,15 +74,20 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" id="captcha" name="captcha"/>
-                <a href="">忘记密码了？</a>
-                <button type="button" id="login_button" class="btn btn-success btn-block">登录</button>
+                <input type="hidden" id="login_captcha" name="token"/>
+                <label id="login_captcha-error" class="error login-error" for="login_captcha">
+                </label>
+                <div style="margin-top: 20px;">
+                    <a href="">忘记密码了？</a>
+                </div>
+                <button type="submit" id="login_button" class="btn btn-success btn-block">登录</button>
             </form>
             <form method="post" action="/login" style="display: none;">
                 <h4 class="no-margins">注册：</h4>
                 <p class="m-t-md">注册到H+后台主题UI框架</p>
                 <input name="username" type="text" class="form-control uname" placeholder="用户名"/>
                 <input name="password" type="password" class="form-control pword m-b" placeholder="密码"/>
+                <input type="checkbox" class="checkbox" id="agree" name="agree"> 我已经认真阅读并同意《使用协议》
                 <button type="submit" class="btn btn-success btn-block">注册</button>
             </form>
         </div>
@@ -123,12 +100,19 @@
     </div>
 </div>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/plugins/layer/layer.min.js"></script>
-<!-- 点击式验证码JS -->
-<script src="/js/plugins/vaptcha.v2.js" charset="UTF-8"></script>
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<!-- layerUI -->
+<script src="js/plugins/layer/layer.min.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="js/plugins/validate/jquery.validate.min.js"></script>
+<script src="js/plugins/validate/messages_zh.min.js"></script>
 <!-- 自定义的 JS -->
-<script src="/js/login.js" charset="UTF-8"></script>
+<script src="js/login.js" charset="UTF-8"></script>
+<script src="js/common.js" charset="UTF-8"></script>
+<!-- 点击式验证码JS -->
+<script src="js/plugins/vaptcha.v2.js" charset="UTF-8"></script>
 </body>
 
 </html>

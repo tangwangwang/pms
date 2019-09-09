@@ -273,8 +273,8 @@
                     href: t,
                     id: "vaptcha_style",
                     onload: o
-                }), n && n.appendChild(r)) : o()
-            })
+                }), n && n.appendChild(r)) : o();
+            });
         }, b = function A(e) {
             var n = document.getElementsByTagName("head")[0], r = document.querySelector("script[src='" + e + "']");
             return new Promise(function (o) {
@@ -352,8 +352,12 @@
                 var u = n(t[c]);
                 r(t[c], u)
             }
-            /** 删除"如何验证"的图标 */
-            $(".vp-about").remove();
+            // 重新加载css, 删除"如何验证"的图标
+            var link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.type = "text/css";
+            link.href = getRootPath() + "/css/vaptcha.css";
+            document.getElementsByTagName("head")[0].appendChild(link);
         }
     }();
     window.onload = j, window.vaptcha = function (e) {

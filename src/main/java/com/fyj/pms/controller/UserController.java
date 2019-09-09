@@ -31,16 +31,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Resource(name = "vaptcha")
-    private Vaptcha vaptcha;
-
     @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(User user) {
+    @ResponseBody
+    public JSONObject login(User user) {
+        JSONObject data = new JSONObject();
         log.info("信息日志");
         log.warn("警告日志");
         log.error("错误日志");
@@ -48,41 +47,11 @@ public class UserController {
             user = userService.findUser(user);
         }
         if (user != null) {
-            return "redirect:/index";
+            data.put("status", "success");
         } else {
-            return "login";
+            data.put("status", "fail");
         }
-    }
-
-    @PostMapping("/captcha")
-    @ResponseBody
-    public JSONObject captcha(@RequestParam("token") String token) {
-        JSONObject json = new JSONObject();
-        vaptcha.setToken(token);
-        CaptchaStatus status = VaptchaUtils.captcha(vaptcha);
-        switch (status) {
-            case SUCCESS:
-                json.put("status", "success");
-                json.put("msg", "验证成功");
-                break;
-            case DELAY:
-                json.put("status", "delay");
-                json.put("msg", "网络连接失败");
-                break;
-            case EXPIRED:
-                json.put("status", "expired");
-                json.put("msg", "验证码过期");
-                break;
-            case EXCEPTION:
-                json.put("status", "exception");
-                json.put("msg", "服务器故障");
-                break;
-            case FAIL:
-            default:
-                json.put("status", "fail");
-                json.put("msg", "验证失败");
-        }
-        return json;
+        return data;
     }
 
 }

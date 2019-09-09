@@ -12,6 +12,7 @@ $(function () {
         $(this).parent().parent().find("strong").css("display", "");
         $(this).parent().css("display", "none");
     });
+    // 验证码对象
     var captcha;
     // 验证码部分
     vaptcha({
@@ -30,15 +31,16 @@ $(function () {
         // 验证单元场景: 后台服务器验证时需要与这个一致
         scene: ""
     }).then(function (vaptchaObj) {
-        // 调用验证实例 vaptchaObj 的 render 方法加载验证按钮
         captcha = vaptchaObj;
+        // 调用验证实例 vaptchaObj 的 render 方法加载验证按钮
         vaptchaObj.render();
         // obj = vaptchaObj;//将VAPTCHA验证实例保存到局部变量中
         // 验证成功触发, 进行其他操作
         vaptchaObj.listen('pass', function () {
             var token = vaptchaObj.getToken();
-            console.log("token:" + token);
-            $("#captcha").val(token);
+            // console.log("token:" + token);
+            $("#login_captcha").val(token);
+            $("#login_captcha-error").html('');
         });
         // 验证弹窗关闭触发
         vaptchaObj.listen('close', function () {
@@ -47,30 +49,49 @@ $(function () {
         });
     });
 
-    // 验证验证码是否正确
-    $("#login_button").click(function () {
-        var token = $("#captcha").val();
-        $.ajax({
-            url: '/captcha'
-            , method: "POST"
-            , data: {
-                token: token
-            }
-            , success: function (data) {
-                layer.msg(data["msg"]);
-                if (data["status"] != "success") {
-                    captcha.reset();
-                    /** 删除"如何验证"的图标 */
-                    $(".vp-about").remove();
+    // 登录验证
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#login_form").validate({
+        ignore: [],
+        rules: {
+            username: "required",
+            password: "required",
+            captcha: "required"
+        },
+        messages: {
+            username: icon + "请输入用户名",
+            password: icon + "请输入密码",
+            captcha: icon + "请进行人机验证"
+        },
+        submitHandler: function (form) {
+            var load = layer.load();
+            $.ajax({
+                url: 'login'
+                , method: "POST"
+                , data: $("#login_form").serialize()
+                , success: function (data) {
+                    layer.close(load);
+                    if (data["status"] !== "success") {
+                        // 重置验证码
+                        layer.msg(data["msg"]);
+                        captcha.reset();
+                    } else {
+                        window.location.href = 'index';
+                    }
                 }
-            }
-            , fail: function () {
-
-            }
-            , error: function () {
-
-            }
-        });
+                , fail: function () {
+                    layer.close(load);
+                }
+                , error: function () {
+                    layer.close(load);
+                }
+            });
+        }
     });
-});
 
+    // 登录操作
+    // $("#login_button").click(function () {
+    //     var token = $("#captcha").val();
+
+    // });
+});
