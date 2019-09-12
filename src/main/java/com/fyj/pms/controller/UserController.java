@@ -3,18 +3,12 @@ package com.fyj.pms.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.fyj.pms.entity.User;
 import com.fyj.pms.service.UserService;
-import com.t2w.utils.captcha.VaptchaUtils;
-import com.t2w.utils.captcha.configuration.Vaptcha;
-import com.t2w.utils.captcha.domain.CaptchaStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
 
 /**
  * @author T2W

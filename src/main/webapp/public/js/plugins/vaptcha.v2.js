@@ -356,7 +356,11 @@
             var link = document.createElement("link");
             link.rel = "stylesheet";
             link.type = "text/css";
-            link.href = getRootPath() + "/css/vaptcha.css";
+            var protocol = window.location.protocol;
+            var host = window.location.host;
+            var port = window.location.port;
+            port = (port === "") ? "80" : port;
+            link.href = protocol + "//" + host + ":" + port + "/css/vaptcha.css";
             document.getElementsByTagName("head")[0].appendChild(link);
         }
     }();

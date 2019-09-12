@@ -97,6 +97,7 @@
         <!--Logger节点用来单独指定日志的形式，name为包路径,比如要为org.springframework包下所有日志指定为INFO级别等。 -->
         <logger name="org.springframework" level="INFO"/>
         <logger name="org.mybatis" level="INFO"/>
+        <logger name="com.fyj.pms.mapper" level="DEBUG"/>
         <!-- druid 打印 SQL 配置 -->
         <logger name="druid.sql.Statement" level="DEBUG" additivity="false"/>
         <logger name="druid.sql.ResultSet" level="DEBUG" additivity="false"/>

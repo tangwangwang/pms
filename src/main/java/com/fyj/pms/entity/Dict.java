@@ -21,6 +21,10 @@ public class Dict {
 
     /** 字典ID, 自增主键 */
     private Long id;
+    /** 表名 */
+    private String tableName;
+    /** 列名 */
+    private String columnName;
     /** 字典描述 */
     private String desc;
 

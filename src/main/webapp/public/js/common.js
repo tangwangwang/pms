@@ -1,10 +1,17 @@
 // 获取项目的根路径
 function getRootPath() {
     //获得根目录
-    var strFullPath = window.document.location.href;
-    var strPath = window.document.location.pathname;
-    var pos = strFullPath.indexOf(strPath);
-    var prePath = strFullPath.substring(0, pos);
-    var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
-    return (prePath + postPath);
+    var protocol = window.location.protocol;
+    var host = window.location.host;
+    var port = window.location.port;
+    port = (port === "") ? "80" : port;
+    return protocol + "//" + host + ":" + port + "/";
+}
+
+function getRootPath(servletContext) {
+    if (servletContext.substring(0, 1) === "/") {
+        return getRootPath() + servletContext.substring(1);
+    } else {
+        return getRootPath() + servletContext;
+    }
 }

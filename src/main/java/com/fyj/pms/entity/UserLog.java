@@ -26,7 +26,7 @@ public class UserLog {
     /** 用户ID */
     private Long userId;
     /** 操作类型 */
-    private Integer type;
+    private String type;
     /** 操作信息 */
     private String info;
     /** 操作详情 */

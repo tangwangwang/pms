@@ -38,7 +38,6 @@ $(function () {
         // 验证成功触发, 进行其他操作
         vaptchaObj.listen('pass', function () {
             var token = vaptchaObj.getToken();
-            // console.log("token:" + token);
             $("#login_captcha").val(token);
             $("#login_captcha-error").html('');
         });
@@ -56,12 +55,12 @@ $(function () {
         rules: {
             username: "required",
             password: "required",
-            captcha: "required"
+            token: "required"
         },
         messages: {
             username: icon + "请输入用户名",
             password: icon + "请输入密码",
-            captcha: icon + "请进行人机验证"
+            token: icon + "请进行人机验证"
         },
         submitHandler: function (form) {
             var load = layer.load();
